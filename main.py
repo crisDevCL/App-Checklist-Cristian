@@ -3,7 +3,6 @@ import json
 from datetime import date
 import os
 
-
 DB_FILE = "data.json"
 TAREAS = [
     "Cuadrar recaudaciones",
@@ -21,9 +20,9 @@ TAREAS = [
     "Ingresar llamanos por robos declarados",
     "Enviar respaldos de robos declarados",
     "Enviar AADD pendientes por correo",
-    "Cargar documentos fisicos en Google Drive",
+    "Cargar documentos físicos en Google Drive",
     "Cierre semanal de temporis",
-    "Actualizacion semanal de precios combustibles"
+    "Actualización semanal de precios combustibles"
 ]
 
 
@@ -45,8 +44,6 @@ def main(page: ft.Page):
     page.scroll = ft.ScrollMode.AUTO
     page.theme_mode = ft.ThemeMode.LIGHT
     page.padding = 10
-    page.window_width = 400
-    page.window_height = 800
 
     datos = cargar_datos()
     selected_date = date.today().isoformat()
@@ -58,7 +55,6 @@ def main(page: ft.Page):
     def cargar_fecha(e=None):
         nonlocal selected_date
         selected_date = fecha_field.value
-
         solo_lectura.value = ""
 
         if selected_date in datos:
@@ -98,7 +94,6 @@ def main(page: ft.Page):
         datos[selected_date] = {"tareas": tareas_estado, "observaciones": obs}
         guardar_datos(datos)
 
-        # 🧹 Limpiar campos tras guardar
         for cb in checkboxes:
             cb.value = False
         for obs in observaciones.values():
@@ -109,6 +104,7 @@ def main(page: ft.Page):
         page.snack_bar.open = True
         page.update()
 
+    # Campo de fecha
     fecha_field = ft.TextField(
         label="Fecha (YYYY-MM-DD)",
         value=selected_date,
@@ -122,6 +118,10 @@ def main(page: ft.Page):
     page.add(ft.Row([fecha_field, btn_refrescar], wrap=True))
     page.add(solo_lectura)
 
+    # Lista con scroll
+    tareas_column = ft.Column(
+        spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
+
     for tarea in TAREAS:
         cb = ft.Checkbox(label=tarea, scale=0.9)
         obs = ft.TextField(
@@ -133,13 +133,16 @@ def main(page: ft.Page):
         )
         checkboxes.append(cb)
         observaciones[tarea] = obs
-        page.add(ft.Column([cb, obs], spacing=5))
+        tareas_column.controls.append(ft.Column([cb, obs], spacing=5))
 
+    page.add(tareas_column)
+
+    # Botón de guardado
     btn_guardar = ft.ElevatedButton("Guardar jornada", on_click=guardar_click)
     page.add(btn_guardar)
 
 
-# 🚨 PARA RENDER
+# 🚨 Para despliegue en Render
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     ft.app(target=main, view=ft.WEB_BROWSER, port=port)
