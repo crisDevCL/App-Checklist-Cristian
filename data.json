@@ -1,0 +1,25 @@
+{
+    "2025-07-14": {
+        "tareas": {
+            "Cuadrar recaudaciones": false,
+            "Actualizar planilla de cierre diario": false,
+            "Cierre de turno en copec fuel": false,
+            "Enviar cuadre de promae": false,
+            "Actualizar planilla de stock Bluemax": false,
+            "Cierre diario de Dinamo": false,
+            "Cierre diario de stock combustibles": false,
+            "Registrar facturas en stock no combustibles": false,
+            "Ingresar pedido de Bluemax granel": false,
+            "Enviar documentos de Bluemax granel recepcionado": false,
+            "Solicitar factura para clientes": false,
+            "Ingresar denuncias por robos declarados": false,
+            "Ingresar llamanos por robos declarados": false,
+            "Enviar respaldos de robos declarados": false,
+            "Enviar AADD pendientes por correo": false,
+            "Cargar documentos fisicos en Google Drive": false,
+            "Cierre semanal de temporis": false,
+            "Actualizacion semanal de precios combustibles": false
+        },
+        "observaciones": {}
+    }
+}
