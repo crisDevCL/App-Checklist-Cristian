@@ -2,7 +2,7 @@ services:
   - type: web
     name: checklist-flet
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.text
     startCommand: python main.py
     envVars:
       - key: FLET_STATIC_ROOT
